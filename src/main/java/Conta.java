@@ -25,16 +25,23 @@ public abstract class Conta implements IConta {
 
     @Override
     public void sacar(double valor) {
-
+        this.saldo -= valor;
     }
 
     @Override
     public void depositar(double valor) {
-
+        this.saldo += valor;
     }
 
     @Override
     public void transferir(double valor, Conta contaDestino) {
+        this.sacar(valor);
+        contaDestino.depositar(valor);
+    }
 
+    protected void imprimirDados() {
+        System.out.println("Agência: " + this.agencia);
+        System.out.println("Conta: " + this.numeroConta);
+        System.out.println("Saldo: " + String.format("%.2f", this.saldo));
     }
 }
